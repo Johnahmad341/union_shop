@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UnionFooter extends StatelessWidget {
   const UnionFooter({super.key});
@@ -28,10 +29,29 @@ class UnionFooter extends StatelessWidget {
           const SizedBox(height: 40),
           const Divider(color: Colors.grey),
           const SizedBox(height: 20),
-          // Bottom bar with copyright and social icons
-          const Text(
-            '© 2024, Union Shop',
-            style: TextStyle(color: Colors.grey, fontSize: 12),
+          // Bottom bar with copyright and payment icons
+          const Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 24,
+            runSpacing: 16,
+            children: [
+              Text(
+                '© 2024, Union Shop',
+                style: TextStyle(color: Colors.grey, fontSize: 12),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FaIcon(FontAwesomeIcons.googlePay, color: Colors.black54, size: 32),
+                  SizedBox(width: 12),
+                  FaIcon(FontAwesomeIcons.applePay, color: Colors.black54, size: 32),
+                  SizedBox(width: 12),
+                  FaIcon(FontAwesomeIcons.ccMastercard, color: Colors.black54, size: 32),
+                  SizedBox(width: 12),
+                  FaIcon(FontAwesomeIcons.paypal, color: Colors.black54, size: 32),
+                ],
+              ),
+            ],
           ),
         ],
       ),
