@@ -65,7 +65,9 @@ class UnionFooter extends StatelessWidget {
         'SHOP',
         [
           _buildFooterLink(context, 'All Products', () {}),
-          _buildFooterLink(context, 'Collections', () {}),
+          _buildFooterLink(context, 'Collections', () {
+            Navigator.pushNamed(context, '/collections');
+          }),
           _buildFooterLink(context, 'Sale', () {}),
         ],
       ),
