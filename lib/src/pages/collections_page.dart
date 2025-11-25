@@ -5,37 +5,30 @@ import 'package:union_shop/src/widgets/footer.dart';
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
-  // Dummy data for our collections. In a real app, this would come from a database.
   static const List<Map<String, String>> _collections = [
     {
       'title': 'Hoodies & Sweatshirts',
-      'imageUrl':
-          'https://images.unsplash.com/photo-1620799140408-edc6d5f93528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1072&q=80',
+      'imageUrl': 'assets/images/hoodies_sweatshirts.jpg',
     },
     {
       'title': 'T-Shirts',
-      'imageUrl':
-          'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      'imageUrl': 'assets/images/t_shirts.jpg',
     },
     {
       'title': 'Essentials',
-      'imageUrl':
-          'https://images.unsplash.com/photo-1587855049254-351f403757a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+      'imageUrl': 'assets/images/essentials.jpg',
     },
     {
       'title': 'Graduation',
-      'imageUrl':
-          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+      'imageUrl': 'assets/images/graduation.jpg',
     },
     {
       'title': 'Summer Favourites',
-      'imageUrl':
-          'https://images.unsplash.com/photo-1507525428034-b723a996f329?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+      'imageUrl': 'assets/images/summer_favourites.jpg',
     },
     {
       'title': 'Gifts & Souvenirs',
-      'imageUrl':
-          'https://images.unsplash.com/photo-1593954286589-7093292c48a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+      'imageUrl': 'assets/images/gifts_souvenirs.jpg',
     },
   ];
 
@@ -108,7 +101,7 @@ class CollectionsPage extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
+            Image.asset(
               imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
