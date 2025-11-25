@@ -61,6 +61,17 @@ class UnionFooter extends StatelessWidget {
           _buildFooterLink(context, 'FAQs', () {}),
         ],
       ),
+      const SizedBox(height: 20, width: 20),
+      _buildFooterColumn(
+        context,
+        'OPENING HOURS',
+        [
+          _buildFooterText('Mon - Fri: 9am - 5pm'),
+          _buildFooterText('Saturday: 10am - 4pm'),
+          _buildFooterText('Sunday: Closed'),
+          _buildFooterText('Bank Holidays: Closed'),
+        ],
+      ),
     ];
   }
 
@@ -96,6 +107,19 @@ class UnionFooter extends StatelessWidget {
             color: Colors.black54,
             fontSize: 14,
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFooterText(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.black54,
+          fontSize: 14,
         ),
       ),
     );
