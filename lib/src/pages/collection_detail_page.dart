@@ -231,7 +231,7 @@ class CollectionDetailPage extends StatelessWidget {
               description:
                   'Send a message from sunny Portsmouth with this beautiful postcard.'),
         ];
-      case 'Gift & Souverniers': // Handles the typo from the previous version
+      case 'Gifts & Souvernirs':
         return const [
           Product(
               title: 'Portsmouth City Magnet',
@@ -266,6 +266,12 @@ class CollectionDetailPage extends StatelessWidget {
               imageUrl: 'assets/images/gifts/portsmouth_city_postcard.jpg',
               description:
                   'Send a message from Portsmouth with this beautiful postcard.'),
+          Product(
+              title: 'UoP Mug',
+              price: '£7.99',
+              imageUrl: 'assets/images/essentials/uop_mug.jpg',
+              description:
+                  'Make your own coffee, baristas are expensive here in Pompey'),
         ];
       case 'Essentials':
         return const [
@@ -300,6 +306,12 @@ class CollectionDetailPage extends StatelessWidget {
               price: '£6.00',
               imageUrl: 'assets/images/essentials/uop_notebook.jpg',
               description: 'A5 notebook with the University crest.'),
+          Product(
+              title: 'UoP Mug',
+              price: '£7.99',
+              imageUrl: 'assets/images/essentials/uop_mug.jpg',
+              description:
+                  'Make your own coffee, baristas are expensive here in Pompey'),
         ];
       case 'Graduation':
         return const [
