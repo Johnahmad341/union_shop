@@ -65,7 +65,8 @@ class CollectionsPage extends StatelessWidget {
                           MediaQuery.of(context).size.width > 700 ? 2 : 1,
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
-                      childAspectRatio: 1.8, // Adjust the card shape (width/height)
+                      childAspectRatio:
+                          1.8, // Adjust the card shape (width/height)
                     ),
                     itemCount: _collections.length,
                     itemBuilder: (context, index) {
@@ -92,7 +93,8 @@ class CollectionsPage extends StatelessWidget {
       BuildContext context, String title, String imageUrl) {
     return GestureDetector(
       onTap: () {
-        // This is a placeholder for future navigation.
+        // Navigate to the detail page, passing the collection title as an argument
+        Navigator.pushNamed(context, '/collection-detail', arguments: title);
       },
       child: Card(
         clipBehavior: Clip.antiAlias,

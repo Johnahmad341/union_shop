@@ -81,11 +81,13 @@ class HomeScreen extends StatelessWidget {
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.zero,
                                 ),
-                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 32, vertical: 16),
                               ),
                               child: const Text(
                                 'BROWSE PRODUCTS',
-                                style: TextStyle(fontSize: 14, letterSpacing: 1),
+                                style:
+                                    TextStyle(fontSize: 14, letterSpacing: 1),
                               ),
                             ),
                           ],
@@ -120,7 +122,8 @@ class HomeScreen extends StatelessWidget {
                           MediaQuery.of(context).size.width > 600 ? 2 : 1,
                       crossAxisSpacing: 24,
                       mainAxisSpacing: 48,
-                      childAspectRatio: 0.8, // Adjust aspect ratio for better look
+                      childAspectRatio:
+                          0.8, // Adjust aspect ratio for better look
                       children: const [
                         ProductCard(
                           title: 'Placeholder Product 1',
