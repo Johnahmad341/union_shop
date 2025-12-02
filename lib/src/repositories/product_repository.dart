@@ -208,7 +208,7 @@ class ProductRepository {
   ];
 
   // Method to get a specified number of random products for the home page.
-  static List<Product> getFeaturedProducts({int count = 4}) {
+  static List<Product> getFeaturedProducts({int count = 8}) {
     final List<Product> shuffled = List.from(_allProducts)..shuffle();
     return shuffled.take(count).toList();
   }

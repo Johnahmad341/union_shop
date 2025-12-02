@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/src/models/product_model.dart';
+import 'package:union_shop/src/repositories/product_repository.dart';
 import 'package:union_shop/src/widgets/app_bar.dart';
 import 'package:union_shop/src/widgets/footer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  void navigateToProduct(BuildContext context) {
-    Navigator.pushNamed(context, '/product');
-  }
 
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
@@ -15,6 +13,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the featured products from the repository
+    final List<Product> featuredProducts =
+        ProductRepository.getFeaturedProducts();
+
     return Scaffold(
       appBar: const UnionAppBar(),
       body: SingleChildScrollView(
@@ -31,8 +33,8 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                          image: AssetImage(
+                            'assets/images/collections/hoodies_sweatshirts.jpg',
                           ),
                           fit: BoxFit.cover,
                         ),
@@ -53,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              'Placeholder Hero Title',
+                              'University of Portsmouth',
                               style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
@@ -64,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 16),
                             const Text(
-                              "This is placeholder text for the hero section.",
+                              "Official merchandise store",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -74,7 +76,9 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 32),
                             ElevatedButton(
-                              onPressed: placeholderCallbackForButtons,
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/collections');
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF4d2963),
                                 foregroundColor: Colors.white,
@@ -107,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'PRODUCTS SECTION',
+                      'FEATURED PRODUCTS',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.black,
@@ -115,41 +119,21 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 48),
-                    GridView.count(
+                    GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 48,
-                      childAspectRatio:
-                          0.8, // Adjust aspect ratio for better look
-                      children: const [
-                        ProductCard(
-                          title: 'Placeholder Product 1',
-                          price: '£10.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 2',
-                          price: '£15.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 3',
-                          price: '£20.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 4',
-                          price: '£25.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                      ],
+                      gridDelegate:
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount:
+                            MediaQuery.of(context).size.width > 600 ? 4 : 2,
+                        crossAxisSpacing: 24,
+                        mainAxisSpacing: 48,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemCount: featuredProducts.length,
+                      itemBuilder: (context, index) {
+                        return ProductCard(product: featuredProducts[index]);
+                      },
                     ),
                   ],
                 ),
@@ -165,22 +149,18 @@ class HomeScreen extends StatelessWidget {
 }
 
 class ProductCard extends StatelessWidget {
-  final String title;
-  final String price;
-  final String imageUrl;
+  final Product product;
 
   const ProductCard({
     super.key,
-    required this.title,
-    required this.price,
-    required this.imageUrl,
+    required this.product,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/product');
+        Navigator.pushNamed(context, '/product', arguments: product);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,8 +169,8 @@ class ProductCard extends StatelessWidget {
             child: Container(
               width: double.infinity,
               color: Colors.grey[200],
-              child: Image.network(
-                imageUrl,
+              child: Image.asset(
+                product.imageUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return const Center(
@@ -206,14 +186,14 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  product.title,
                   style: const TextStyle(fontSize: 14, color: Colors.black),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  price,
+                  product.price,
                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
               ],
