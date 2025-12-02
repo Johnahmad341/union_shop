@@ -8,27 +8,27 @@ class CollectionsPage extends StatelessWidget {
   static const List<Map<String, String>> _collections = [
     {
       'title': 'Hoodies & Sweatshirts',
-      'imageUrl': 'assets/images/hoodies_sweatshirts.jpg',
+      'imageUrl': 'assets/images/collections/hoodies_sweatshirts.jpg',
     },
     {
       'title': 'T-Shirts',
-      'imageUrl': 'assets/images/t_shirts.jpg',
+      'imageUrl': 'assets/images/collections/t_shirts.jpg',
     },
     {
       'title': 'Essentials',
-      'imageUrl': 'assets/images/essentials.jpg',
+      'imageUrl': 'assets/images/collections/essentials.jpg',
     },
     {
       'title': 'Graduation',
-      'imageUrl': 'assets/images/graduation.jpg',
+      'imageUrl': 'assets/images/collections/graduation.jpg',
     },
     {
       'title': 'Summer Favourites',
-      'imageUrl': 'assets/images/summer_favourites.jpg',
+      'imageUrl': 'assets/images/collections/summer_favourites.jpg',
     },
     {
       'title': 'Gifts & Souvenirs',
-      'imageUrl': 'assets/images/gifts_souvenirs.jpg',
+      'imageUrl': 'assets/images/collections/gifts_souvenirs.jpg',
     },
   ];
 
