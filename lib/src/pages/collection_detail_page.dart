@@ -231,7 +231,7 @@ class CollectionDetailPage extends StatelessWidget {
               description:
                   'Send a message from sunny Portsmouth with this beautiful postcard.'),
         ];
-      case 'Gifts & Souvernirs':
+      case 'Gifts & Souvenirs':
         return const [
           Product(
               title: 'Portsmouth City Magnet',
