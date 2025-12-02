@@ -1,39 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/src/repositories/product_repository.dart';
 import 'package:union_shop/src/widgets/app_bar.dart';
 import 'package:union_shop/src/widgets/footer.dart';
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
-  static const List<Map<String, String>> _collections = [
-    {
-      'title': 'Hoodies & Sweatshirts',
-      'imageUrl': 'assets/images/collections/hoodies_sweatshirts.jpg',
-    },
-    {
-      'title': 'T-Shirts',
-      'imageUrl': 'assets/images/collections/t_shirts.jpg',
-    },
-    {
-      'title': 'Essentials',
-      'imageUrl': 'assets/images/collections/essentials.jpg',
-    },
-    {
-      'title': 'Graduation',
-      'imageUrl': 'assets/images/collections/graduation.jpg',
-    },
-    {
-      'title': 'Summer Favourites',
-      'imageUrl': 'assets/images/collections/summer_favourites.jpg',
-    },
-    {
-      'title': 'Gifts & Souvenirs',
-      'imageUrl': 'assets/images/collections/gifts_souvenirs.jpg',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    // Get the collections from the repository
+    final List<Map<String, String>> collections =
+        ProductRepository.getCollections();
+
     return Scaffold(
       appBar: const UnionAppBar(),
       body: SingleChildScrollView(
@@ -68,9 +46,9 @@ class CollectionsPage extends StatelessWidget {
                       childAspectRatio:
                           1.8, // Adjust the card shape (width/height)
                     ),
-                    itemCount: _collections.length,
+                    itemCount: collections.length,
                     itemBuilder: (context, index) {
-                      final collection = _collections[index];
+                      final collection = collections[index];
                       return _buildCollectionCard(
                         context,
                         collection['title']!,

@@ -234,4 +234,34 @@ class ProductRepository {
             .toList();
     }
   }
+
+  // Method to get all the collections for the collections page
+  static List<Map<String, String>> getCollections() {
+    return [
+      {
+        'title': 'Hoodies & Sweatshirts',
+        'imageUrl': 'assets/images/collections/hoodies_sweatshirts.jpg',
+      },
+      {
+        'title': 'T-Shirts',
+        'imageUrl': 'assets/images/collections/t_shirts.jpg',
+      },
+      {
+        'title': 'Essentials',
+        'imageUrl': 'assets/images/collections/essentials.jpg',
+      },
+      {
+        'title': 'Graduation',
+        'imageUrl': 'assets/images/collections/graduation.jpg',
+      },
+      {
+        'title': 'Summer Favourites',
+        'imageUrl': 'assets/images/collections/summer_favourites.jpg',
+      },
+      {
+        'title': 'Gifts & Souvenirs',
+        'imageUrl': 'assets/images/collections/gifts_souvenirs.jpg',
+      },
+    ];
+  }
 }
