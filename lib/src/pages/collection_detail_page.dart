@@ -25,13 +25,29 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Get the collection title passed from the previous page
     final String collectionTitle =
         ModalRoute.of(context)!.settings.arguments as String;
 
-    // Get the specific list of products for the current collection from the repository
-    final List<Product> products =
+    // Get products for this collection
+    List<Product> products =
         ProductRepository.getProductsForCollection(collectionTitle);
+
+    // Filter logic (dummy: only 'In Stock' supported)
+    if (_selectedFilter == 'In Stock') {
+      products = products
+          .where((p) => p.price != '')
+          .toList(); // Replace with real stock logic
+    }
+
+    // Sort logic
+    if (_selectedSort == 'Price: Low to High') {
+      products
+          .sort((a, b) => _parsePrice(a.price).compareTo(_parsePrice(b.price)));
+    } else if (_selectedSort == 'Price: High to Low') {
+      products
+          .sort((a, b) => _parsePrice(b.price).compareTo(_parsePrice(a.price)));
+    }
+    // 'Featured' is default order
 
     return Scaffold(
       appBar: const UnionAppBar(),
@@ -49,7 +65,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 24),
-                  // Real dropdowns
                   Row(
                     children: [
                       Expanded(
@@ -72,7 +87,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                     ],
                   ),
                   const SizedBox(height: 32),
-                  // Grid of products
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -100,12 +114,10 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                                 errorBuilder: (context, error, stackTrace) {
-                                  // Show a placeholder if the asset is not found
                                   return Container(
                                     color: Colors.grey[200],
                                     child: const Center(
-                                        child:
-                                            Icon(Icons.image_not_supported)),
+                                        child: Icon(Icons.image_not_supported)),
                                   );
                                 },
                               ),
@@ -129,6 +141,12 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
         ),
       ),
     );
+  }
+
+  // Helper to parse price string like '£34.99' to double
+  double _parsePrice(String price) {
+    final cleaned = price.replaceAll(RegExp(r'[^0-9.]'), '');
+    return double.tryParse(cleaned) ?? 0.0;
   }
 
   // Helper widget for the dropdowns
