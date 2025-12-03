@@ -42,13 +42,17 @@ class UnionFooter extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  FaIcon(FontAwesomeIcons.googlePay, color: Colors.black54, size: 32),
+                  FaIcon(FontAwesomeIcons.googlePay,
+                      color: Colors.black54, size: 32),
                   SizedBox(width: 12),
-                  FaIcon(FontAwesomeIcons.applePay, color: Colors.black54, size: 32),
+                  FaIcon(FontAwesomeIcons.applePay,
+                      color: Colors.black54, size: 32),
                   SizedBox(width: 12),
-                  FaIcon(FontAwesomeIcons.ccMastercard, color: Colors.black54, size: 32),
+                  FaIcon(FontAwesomeIcons.ccMastercard,
+                      color: Colors.black54, size: 32),
                   SizedBox(width: 12),
-                  FaIcon(FontAwesomeIcons.paypal, color: Colors.black54, size: 32),
+                  FaIcon(FontAwesomeIcons.paypal,
+                      color: Colors.black54, size: 32),
                 ],
               ),
             ],
@@ -64,7 +68,9 @@ class UnionFooter extends StatelessWidget {
         context,
         'SHOP',
         [
-          _buildFooterLink(context, 'All Products', () {}),
+          _buildFooterLink(context, 'All Products', () {
+            Navigator.pushNamed(context, '/all-products');
+          }),
           _buildFooterLink(context, 'Collections', () {
             Navigator.pushNamed(context, '/collections');
           }),
