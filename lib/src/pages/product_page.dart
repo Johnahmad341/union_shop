@@ -3,8 +3,19 @@ import 'package:union_shop/src/models/product_model.dart';
 import 'package:union_shop/src/widgets/app_bar.dart';
 import 'package:union_shop/src/widgets/footer.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  String? _selectedSize;
+  String? _selectedColour;
+
+  final List<String> _sizes = ['Small', 'Medium', 'Large', 'X-Large'];
+  final List<String> _colours = ['Grey', 'Navy', 'White', 'Black'];
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +24,7 @@ class ProductPage extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as Product;
 
     return Scaffold(
-      appBar: const UnionAppBar(), // Use the custom app bar
+      appBar: const UnionAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -89,6 +100,47 @@ class ProductPage extends StatelessWidget {
 
                   const SizedBox(height: 24),
 
+                  // Dropdowns
+                  _buildDropdown('Size', _sizes, _selectedSize, (newValue) {
+                    setState(() {
+                      _selectedSize = newValue;
+                    });
+                  }),
+                  const SizedBox(height: 16),
+                  _buildDropdown('Colour', _colours, _selectedColour,
+                      (newValue) {
+                    setState(() {
+                      _selectedColour = newValue;
+                    });
+                  }),
+
+                  const SizedBox(height: 24),
+
+                  // Quantity selector
+                  _buildQuantitySelector(),
+
+                  const SizedBox(height: 24),
+
+                  // Add to basket button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Button does not need to do anything yet
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      child: const Text(
+                        'Add to basket',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
                   // Product description
                   const Text(
                     'Description',
@@ -116,6 +168,51 @@ class ProductPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  // Helper widget for the dropdowns
+  Widget _buildDropdown(String hint, List<String> items, String? selectedValue,
+      ValueChanged<String?> onChanged) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          isExpanded: true,
+          hint: Text(hint),
+          value: selectedValue,
+          onChanged: onChanged,
+          items: items.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  // Helper widget for the quantity selector
+  Widget _buildQuantitySelector() {
+    return Row(
+      children: [
+        const Text('Quantity', style: TextStyle(fontSize: 16)),
+        const Spacer(),
+        IconButton(
+          icon: const Icon(Icons.remove),
+          onPressed: () {},
+        ),
+        const Text('1', style: TextStyle(fontSize: 18)),
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }

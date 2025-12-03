@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/src/models/product_model.dart';
+import 'package:union_shop/src/repositories/product_repository.dart';
 import 'package:union_shop/src/widgets/app_bar.dart';
 import 'package:union_shop/src/widgets/footer.dart';
-import 'package:union_shop/src/models/product_model.dart';
-import 'package:union_shop/src/repositories/product_repository.dart'; // Import the repository
 
-class CollectionDetailPage extends StatelessWidget {
+class CollectionDetailPage extends StatefulWidget {
   const CollectionDetailPage({super.key});
+
+  @override
+  _CollectionDetailPageState createState() => _CollectionDetailPageState();
+}
+
+class _CollectionDetailPageState extends State<CollectionDetailPage> {
+  String? _selectedSort;
+  String? _selectedFilter;
+
+  // Dummy data for dropdowns - can be expanded later
+  final List<String> _sortOptions = [
+    'Featured',
+    'Price: Low to High',
+    'Price: High to Low'
+  ];
+  final List<String> _filterOptions = ['All', 'In Stock'];
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +49,26 @@ class CollectionDetailPage extends StatelessWidget {
                         fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 24),
-                  // Placeholder dropdowns (they don't need to work yet)
+                  // Real dropdowns
                   Row(
                     children: [
-                      Expanded(child: _buildDummyDropdown('Sort by')),
+                      Expanded(
+                          child: _buildDropdown(
+                              'Sort by', _sortOptions, _selectedSort,
+                              (newValue) {
+                        setState(() {
+                          _selectedSort = newValue;
+                        });
+                      })),
                       const SizedBox(width: 16),
-                      Expanded(child: _buildDummyDropdown('Filter')),
+                      Expanded(
+                          child: _buildDropdown(
+                              'Filter', _filterOptions, _selectedFilter,
+                              (newValue) {
+                        setState(() {
+                          _selectedFilter = newValue;
+                        });
+                      })),
                     ],
                   ),
                   const SizedBox(height: 32),
@@ -74,7 +104,8 @@ class CollectionDetailPage extends StatelessWidget {
                                   return Container(
                                     color: Colors.grey[200],
                                     child: const Center(
-                                        child: Icon(Icons.image_not_supported)),
+                                        child:
+                                            Icon(Icons.image_not_supported)),
                                   );
                                 },
                               ),
@@ -100,19 +131,28 @@ class CollectionDetailPage extends StatelessWidget {
     );
   }
 
-  // Helper widget for the placeholder dropdowns
-  Widget _buildDummyDropdown(String text) {
+  // Helper widget for the dropdowns
+  Widget _buildDropdown(String hint, List<String> items, String? selectedValue,
+      ValueChanged<String?> onChanged) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(4),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(text),
-          const Icon(Icons.arrow_drop_down),
-        ],
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          isExpanded: true,
+          hint: Text(hint),
+          value: selectedValue,
+          onChanged: onChanged,
+          items: items.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
