@@ -26,26 +26,34 @@ class ProductRepository {
         price: '£32.99',
         imageUrl: 'assets/images/hoodies/portsmouth_hoodie_navy.jpg',
         description: 'A stylish navy hoodie with Portsmouth branding.',
-        category: 'Hoodies & Sweatshirts'),
+        category: 'Hoodies & Sweatshirts',
+        availableSizes: ['S', 'M', 'L'],
+        availableColours: ['Navy', 'Black']),
     Product(
         title: 'UoP Crest Sweatshirt - Navy',
         price: '£29.99',
         imageUrl: 'assets/images/hoodies/uop_crest_sweatshirt_navy.jpg',
         description: 'A classic navy sweatshirt with the UoP crest.',
-        category: 'Hoodies & Sweatshirts'),
+        category: 'Hoodies & Sweatshirts',
+        availableSizes: ['S', 'M', 'L'],
+        availableColours: ['Navy']),
     Product(
         title: 'Portsmouth Hoodie - Grey',
         price: '£32.99',
         imageUrl: 'assets/images/hoodies/portsmouth_hoodie_grey.jpg',
         description: 'A stylish grey hoodie with Portsmouth branding.',
-        category: 'Hoodies & Sweatshirts'),
+        category: 'Hoodies & Sweatshirts',
+        availableSizes: ['S', 'M', 'L'],
+        availableColours: ['Grey', 'Black']),
     Product(
         title: 'UoP Crested Hoodie - Grey',
         price: '£34.99',
         imageUrl: 'assets/images/hoodies/uop_crested_hoodie_grey.jpg',
         description:
             'Classic grey hoodie with the University of Portsmouth crest.',
-        category: 'Hoodies & Sweatshirts'),
+        category: 'Hoodies & Sweatshirts',
+        availableSizes: ['S', 'M', 'L'],
+        availableColours: ['Grey', 'Navy']),
 
     // T-Shirts
     Product(
@@ -61,32 +69,42 @@ class ProductRepository {
         price: '£17.50',
         imageUrl: 'assets/images/tshirts/portsmouth_anchor_tshirt.jpg',
         description: 'Navy t-shirt featuring a cool anchor design.',
-        category: 'T-Shirts'),
+        category: 'T-Shirts',
+        availableSizes: ['S', 'M', 'L', 'XL'],
+        availableColours: ['Navy', 'White']),
     Product(
         title: 'UoP Logo T-Shirt - Navy',
         price: '£15.00',
         imageUrl: 'assets/images/tshirts/uop_logo_tshirt_navy.jpg',
         description: 'A simple and stylish navy t-shirt with the UoP logo.',
-        category: 'T-Shirts'),
+        category: 'T-Shirts',
+        availableSizes: ['S', 'M', 'L', 'XL'],
+        availableColours: ['Navy', 'Black']),
     Product(
         title: 'UoP Crest T-Shirt - Navy',
         price: '£16.00',
         imageUrl: 'assets/images/tshirts/uop_crest_tshirt_navy.jpg',
         description: 'A classic navy t-shirt with the UoP crest.',
-        category: 'T-Shirts'),
+        category: 'T-Shirts',
+        availableSizes: ['S', 'M', 'L', 'XL'],
+        availableColours: ['Navy', 'White']),
     Product(
         title: 'Portsmouth Coordinates T-Shirt - White',
         price: '£17.50',
         imageUrl:
             'assets/images/tshirts/portsmouth_coordinates_tshirt_white.jpg',
         description: 'White t-shirt with Portsmouth coordinates design.',
-        category: 'T-Shirts'),
+        category: 'T-Shirts',
+        availableSizes: ['S', 'M', 'L', 'XL'],
+        availableColours: ['White', 'Grey']),
     Product(
         title: 'UoP Crest T-Shirt - Grey',
         price: '£16.00',
         imageUrl: 'assets/images/tshirts/uop_crest_tshirt_grey.jpg',
         description: 'A classic grey t-shirt with the UoP crest.',
-        category: 'T-Shirts'),
+        category: 'T-Shirts',
+        availableSizes: ['S', 'M', 'L', 'XL'],
+        availableColours: ['Grey', 'Black']),
 
     // Gifts & Souvenirs
     Product(
@@ -119,7 +137,8 @@ class ProductRepository {
         price: '£12.00',
         imageUrl: 'assets/images/gifts/uop_water_bottle.jpg',
         description: 'Stay hydrated with this UoP branded water bottle.',
-        category: 'Gifts & Souvenirs'),
+        category: 'Gifts & Souvenirs',
+        availableColours: ['Purple', 'Black', 'White', 'Silver']),
     Product(
         title: 'Portsmouth City Postcard',
         price: '£1.00',
@@ -172,7 +191,8 @@ class ProductRepository {
         description:
             'Make your own coffee, baristas are expensive here in Pompey',
         category: 'Essentials',
-        availableColours: ['White', 'Black', 'Purple']),
+        availableColours: ['White', 'Black', 'Purple', 'Navy', 'Grey'],
+        availableSizes: ['250ml', '350ml', '500ml']),
 
     // Graduation
     Product(
