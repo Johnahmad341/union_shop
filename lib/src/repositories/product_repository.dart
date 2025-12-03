@@ -207,6 +207,11 @@ class ProductRepository {
         category: 'Graduation'),
   ];
 
+  // Method to get all products.
+  static List<Product> getAllProducts() {
+    return _allProducts;
+  }
+
   // Method to get a specified number of random products for the home page.
   static List<Product> getFeaturedProducts({int count = 8}) {
     final List<Product> shuffled = List.from(_allProducts)..shuffle();
