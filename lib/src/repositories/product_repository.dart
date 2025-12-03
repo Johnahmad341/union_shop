@@ -10,13 +10,17 @@ class ProductRepository {
         imageUrl: 'assets/images/hoodies/uop_crest_hoodie_navy.jpg',
         description:
             'Classic navy hoodie with the University of Portsmouth crest.',
-        category: 'Hoodies & Sweatshirts'),
+        category: 'Hoodies & Sweatshirts',
+        availableSizes: ['S', 'M', 'L'],
+        availableColours: ['Navy']),
     Product(
         title: 'Portsmouth Sweatshirt - Grey',
         price: '£29.99',
         imageUrl: 'assets/images/hoodies/portsmouth_sweatshirt_grey.jpg',
         description: 'A comfortable grey sweatshirt with Portsmouth branding.',
-        category: 'Hoodies & Sweatshirts'),
+        category: 'Hoodies & Sweatshirts',
+        availableSizes: ['S', 'M', 'L'],
+        availableColours: ['Grey']),
     Product(
         title: 'Portsmouth Hoodie - Navy',
         price: '£32.99',
@@ -49,7 +53,9 @@ class ProductRepository {
         price: '£15.00',
         imageUrl: 'assets/images/tshirts/uop_logo_tshirt_white.jpg',
         description: 'A simple and stylish white t-shirt with the UoP logo.',
-        category: 'T-Shirts'),
+        category: 'T-Shirts',
+        availableSizes: ['S', 'M', 'L', 'XL'],
+        availableColours: ['White']),
     Product(
         title: 'Portsmouth Anchor T-Shirt',
         price: '£17.50',
@@ -165,7 +171,8 @@ class ProductRepository {
         imageUrl: 'assets/images/essentials/uop_mug.jpg',
         description:
             'Make your own coffee, baristas are expensive here in Pompey',
-        category: 'Essentials'),
+        category: 'Essentials',
+        availableColours: ['White', 'Black', 'Purple']),
 
     // Graduation
     Product(
