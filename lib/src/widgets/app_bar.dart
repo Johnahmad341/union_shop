@@ -86,7 +86,8 @@ class UnionAppBar extends StatelessWidget implements PreferredSizeWidget {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: placeholderCallbackForButtons,
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/auth'),
                         ),
                         IconButton(
                           icon: const Icon(
@@ -102,9 +103,11 @@ class UnionAppBar extends StatelessWidget implements PreferredSizeWidget {
                           onPressed: placeholderCallbackForButtons,
                         ),
                         IconButton(
-                          icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
+                          icon: const Icon(Icons.menu,
+                              size: 18, color: Colors.grey),
                           padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
                           onPressed: placeholderCallbackForButtons,
                         ),
                       ],
