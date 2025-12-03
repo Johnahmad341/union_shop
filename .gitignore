@@ -43,5 +43,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 Flutter Coursework.docx
-lib/src/pages/collection_detail_page.dart
 Flutter Coursework.txt
