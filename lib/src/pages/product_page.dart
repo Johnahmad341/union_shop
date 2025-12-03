@@ -14,9 +14,6 @@ class _ProductPageState extends State<ProductPage> {
   String? _selectedSize;
   String? _selectedColour;
 
-  final List<String> _sizes = ['Small', 'Medium', 'Large', 'X-Large'];
-  final List<String> _colours = ['Grey', 'Navy', 'White', 'Black'];
-
   @override
   Widget build(BuildContext context) {
     // Get the product object passed from the previous page
@@ -101,14 +98,23 @@ class _ProductPageState extends State<ProductPage> {
                   const SizedBox(height: 24),
 
                   // Dropdowns
-                  _buildDropdown('Size', _sizes, _selectedSize, (newValue) {
+                  _buildDropdown(
+                      'Size',
+                      product.availableSizes.isNotEmpty
+                          ? product.availableSizes
+                          : const <String>[],
+                      _selectedSize, (newValue) {
                     setState(() {
                       _selectedSize = newValue;
                     });
                   }),
                   const SizedBox(height: 16),
-                  _buildDropdown('Colour', _colours, _selectedColour,
-                      (newValue) {
+                  _buildDropdown(
+                      'Colour',
+                      product.availableColours.isNotEmpty
+                          ? product.availableColours
+                          : const <String>[],
+                      _selectedColour, (newValue) {
                     setState(() {
                       _selectedColour = newValue;
                     });
