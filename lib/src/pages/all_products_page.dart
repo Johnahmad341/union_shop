@@ -14,15 +14,26 @@ class AllProductsPage extends StatefulWidget {
 
 class _AllProductsPageState extends State<AllProductsPage> {
   String? _selectedSort;
-  String? _selectedFilter;
+  String? _selectedCategory;
+  String? _selectedSaleFilter;
 
   final List<String> _sortOptions = [
     'Featured',
     'Price: Low to High',
     'Price: High to Low',
+    'Discount: High to Low',
   ];
 
-  final List<String> _filterOptions = ['All', 'In Stock'];
+  final List<String> _categoryOptions = [
+    'All Categories',
+    'Hoodies & Sweatshirts',
+    'T-Shirts',
+    'Gifts',
+    'Graduation',
+    'Essentials',
+  ];
+
+  final List<String> _saleFilterOptions = ['All Products', 'Sale Items Only'];
 
   double _parsePrice(String price) {
     final cleaned = price.replaceAll(RegExp(r'[^0-9.]'), '');
@@ -63,16 +74,32 @@ class _AllProductsPageState extends State<AllProductsPage> {
       ProductRepository.getAllProducts(),
     );
 
-    if (_selectedFilter == 'In Stock') {
-      products = products.where((p) => p.price.isNotEmpty).toList();
+    // Apply category filter
+    if (_selectedCategory != null && _selectedCategory != 'All Categories') {
+      products =
+          products.where((p) => p.category == _selectedCategory).toList();
     }
 
+    // Apply sale filter
+    if (_selectedSaleFilter == 'Sale Items Only') {
+      products = products.where((p) => p.isOnSale).toList();
+    }
+
+    // Apply sorting
     if (_selectedSort == 'Price: Low to High') {
       products
           .sort((a, b) => _parsePrice(a.price).compareTo(_parsePrice(b.price)));
     } else if (_selectedSort == 'Price: High to Low') {
       products
           .sort((a, b) => _parsePrice(b.price).compareTo(_parsePrice(a.price)));
+    } else if (_selectedSort == 'Discount: High to Low') {
+      products.sort((a, b) {
+        if (!a.isOnSale || a.salePrice == null) return 1;
+        if (!b.isOnSale || b.salePrice == null) return -1;
+        final discountA = _parsePrice(a.price) - _parsePrice(a.salePrice!);
+        final discountB = _parsePrice(b.price) - _parsePrice(b.salePrice!);
+        return discountB.compareTo(discountA);
+      });
     }
 
     int crossAxisCount;
@@ -100,29 +127,47 @@ class _AllProductsPageState extends State<AllProductsPage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: _buildDropdown(
-                      'Sort by',
-                      _sortOptions,
-                      _selectedSort,
-                      (newValue) {
-                        setState(() {
-                          _selectedSort = newValue;
-                        });
-                      },
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildDropdown(
+                          'Sort by',
+                          _sortOptions,
+                          _selectedSort,
+                          (newValue) {
+                            setState(() {
+                              _selectedSort = newValue;
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _buildDropdown(
+                          'Category',
+                          _categoryOptions,
+                          _selectedCategory,
+                          (newValue) {
+                            setState(() {
+                              _selectedCategory = newValue;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
                     child: _buildDropdown(
-                      'Filter',
-                      _filterOptions,
-                      _selectedFilter,
+                      'Sale Filter',
+                      _saleFilterOptions,
+                      _selectedSaleFilter,
                       (newValue) {
                         setState(() {
-                          _selectedFilter = newValue;
+                          _selectedSaleFilter = newValue;
                         });
                       },
                     ),
@@ -131,21 +176,30 @@ class _AllProductsPageState extends State<AllProductsPage> {
               ),
             ),
             const SizedBox(height: 16),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(16.0),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                crossAxisSpacing: 16.0,
-                mainAxisSpacing: 16.0,
-                childAspectRatio: 0.75,
+            if (products.isEmpty)
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Text(
+                  'No products found',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              )
+            else
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(16.0),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  crossAxisSpacing: 16.0,
+                  mainAxisSpacing: 16.0,
+                  childAspectRatio: 0.75,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return ProductCard(product: products[index]);
+                },
               ),
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return ProductCard(product: products[index]);
-              },
-            ),
             const UnionFooter(),
           ],
         ),

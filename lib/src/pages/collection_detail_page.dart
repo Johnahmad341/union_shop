@@ -15,13 +15,13 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
   String? _selectedSort;
   String? _selectedFilter;
 
-  // Dummy data for dropdowns - can be expanded later
   final List<String> _sortOptions = [
     'Featured',
     'Price: Low to High',
-    'Price: High to Low'
+    'Price: High to Low',
+    'Discount: High to Low',
   ];
-  final List<String> _filterOptions = ['All', 'In Stock'];
+  final List<String> _filterOptions = ['All', 'Sale Items Only'];
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +32,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
     List<Product> products =
         ProductRepository.getProductsForCollection(collectionTitle);
 
-    // Filter logic (dummy: only 'In Stock' supported)
-    if (_selectedFilter == 'In Stock') {
-      products = products
-          .where((p) => p.price != '')
-          .toList(); // Replace with real stock logic
+    // Filter logic
+    if (_selectedFilter == 'Sale Items Only') {
+      products = products.where((p) => p.isOnSale).toList();
     }
 
     // Sort logic
@@ -46,6 +44,14 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
     } else if (_selectedSort == 'Price: High to Low') {
       products
           .sort((a, b) => _parsePrice(b.price).compareTo(_parsePrice(a.price)));
+    } else if (_selectedSort == 'Discount: High to Low') {
+      products.sort((a, b) {
+        if (!a.isOnSale || a.salePrice == null) return 1;
+        if (!b.isOnSale || b.salePrice == null) return -1;
+        final discountA = _parsePrice(a.price) - _parsePrice(a.salePrice!);
+        final discountB = _parsePrice(b.price) - _parsePrice(b.salePrice!);
+        return discountB.compareTo(discountA);
+      });
     }
     // 'Featured' is default order
 
