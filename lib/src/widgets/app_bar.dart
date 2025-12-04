@@ -8,7 +8,7 @@ class UnionAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<UnionAppBar> createState() => _UnionAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(140);
+  Size get preferredSize => const Size.fromHeight(150);
 }
 
 class _UnionAppBarState extends State<UnionAppBar> {
