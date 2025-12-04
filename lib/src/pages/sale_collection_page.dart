@@ -13,7 +13,7 @@ class SaleCollectionPage extends StatefulWidget {
 
 class _SaleCollectionPageState extends State<SaleCollectionPage> {
   String? _selectedSort;
-  String? _selectedFilter;
+  String? _selectedCategory;
 
   // Sort and filter options
   final List<String> _sortOptions = [
@@ -22,18 +22,24 @@ class _SaleCollectionPageState extends State<SaleCollectionPage> {
     'Price: High to Low',
     'Discount: High to Low'
   ];
-  final List<String> _filterOptions = ['All', 'In Stock'];
+  final List<String> _categoryOptions = [
+    'All Categories',
+    'Hoodies & Sweatshirts',
+    'T-Shirts',
+    'Gifts',
+    'Graduation',
+    'Essentials',
+  ];
 
   @override
   Widget build(BuildContext context) {
     // Get all products that are on sale
     List<Product> products = ProductRepository.getSaleProducts();
 
-    // Filter logic (dummy: only 'In Stock' supported)
-    if (_selectedFilter == 'In Stock') {
-      products = products
-          .where((p) => p.price != '')
-          .toList(); // Replace with real stock logic
+    // Apply category filter
+    if (_selectedCategory != null && _selectedCategory != 'All Categories') {
+      products =
+          products.where((p) => p.category == _selectedCategory).toList();
     }
 
     // Sort logic
@@ -87,10 +93,10 @@ class _SaleCollectionPageState extends State<SaleCollectionPage> {
                       const SizedBox(width: 16),
                       Expanded(
                           child: _buildDropdown(
-                              'Filter', _filterOptions, _selectedFilter,
+                              'Category', _categoryOptions, _selectedCategory,
                               (newValue) {
                         setState(() {
-                          _selectedFilter = newValue;
+                          _selectedCategory = newValue;
                         });
                       })),
                     ],
