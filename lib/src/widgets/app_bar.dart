@@ -12,8 +12,6 @@ class UnionAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _UnionAppBarState extends State<UnionAppBar> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   void _navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }

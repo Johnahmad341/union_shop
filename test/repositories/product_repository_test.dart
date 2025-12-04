@@ -29,7 +29,6 @@ void main() {
     test('getSaleProducts should return only products marked as on sale', () {
       // Arrange & Act
       final saleProducts = ProductRepository.getSaleProducts();
-      final allProducts = ProductRepository.getAllProducts();
 
       // Assert
       expect(saleProducts, isNotEmpty);
