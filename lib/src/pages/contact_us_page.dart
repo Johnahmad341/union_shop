@@ -60,8 +60,9 @@ class ContactUsPage extends StatelessWidget {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   bool isWide = constraints.maxWidth > 900;
-                  int crossAxisCount = isWide ? 3 : (constraints.maxWidth > 600 ? 2 : 1);
-                  
+                  int crossAxisCount =
+                      isWide ? 3 : (constraints.maxWidth > 600 ? 2 : 1);
+
                   return GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -289,8 +290,12 @@ class ContactUsPage extends StatelessWidget {
                   detail,
                   style: TextStyle(
                     fontSize: 13,
-                    color: detail.endsWith(':') ? Colors.black87 : Colors.grey[700],
-                    fontWeight: detail.endsWith(':') ? FontWeight.w600 : FontWeight.normal,
+                    color: detail.endsWith(':')
+                        ? Colors.black87
+                        : Colors.grey[700],
+                    fontWeight: detail.endsWith(':')
+                        ? FontWeight.w600
+                        : FontWeight.normal,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -343,9 +348,12 @@ class ContactUsPage extends StatelessWidget {
             spacing: 16,
             runSpacing: 16,
             children: [
-              _buildSocialIcon(FontAwesomeIcons.facebook, const Color(0xFF1877F2)),
-              _buildSocialIcon(FontAwesomeIcons.instagram, const Color(0xFFE4405F)),
-              _buildSocialIcon(FontAwesomeIcons.twitter, const Color(0xFF1DA1F2)),
+              _buildSocialIcon(
+                  FontAwesomeIcons.facebook, const Color(0xFF1877F2)),
+              _buildSocialIcon(
+                  FontAwesomeIcons.instagram, const Color(0xFFE4405F)),
+              _buildSocialIcon(
+                  FontAwesomeIcons.twitter, const Color(0xFF1DA1F2)),
               _buildSocialIcon(FontAwesomeIcons.tiktok, Colors.black),
             ],
           ),
