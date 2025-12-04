@@ -126,8 +126,30 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                               padding: const EdgeInsets.only(top: 8.0),
                               child: Text(product.title, maxLines: 2),
                             ),
-                            Text(product.price,
-                                style: const TextStyle(color: Colors.grey)),
+                            // Price display with sale logic
+                            if (product.isOnSale && product.salePrice != null)
+                              Row(
+                                children: [
+                                  Text(
+                                    product.price,
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    product.salePrice!,
+                                    style: const TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            else
+                              Text(product.price,
+                                  style: const TextStyle(color: Colors.grey)),
                           ],
                         ),
                       );
