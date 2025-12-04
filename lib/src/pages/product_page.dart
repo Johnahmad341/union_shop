@@ -88,15 +88,39 @@ class _ProductPageState extends State<ProductPage> {
 
                   const SizedBox(height: 12),
 
-                  // Product price
-                  Text(
-                    product.price, // Use product's price
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4d2963),
+                  // Product price with sale logic
+                  if (product.isOnSale && product.salePrice != null)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.price,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          product.salePrice!,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                    Text(
+                      product.price,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4d2963),
+                      ),
                     ),
-                  ),
 
                   const SizedBox(height: 24),
 
