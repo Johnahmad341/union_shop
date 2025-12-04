@@ -146,27 +146,28 @@ class _UnionAppBarState extends State<UnionAppBar> {
           // Main header
           Container(
             height: 60,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: isDesktop ? 16 : 8),
             child: Row(
               children: [
                 // Logo
                 GestureDetector(
                   onTap: () => _navigateToHome(context),
-                  child: Image.network(
-                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                    height: 40,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        width: 40,
-                        height: 40,
-                        child: const Icon(
-                          Icons.store,
-                          color: Colors.grey,
-                        ),
-                      );
-                    },
+                  child: SizedBox(
+                    height: isDesktop ? 40 : 32,
+                    width: isDesktop ? 40 : 32,
+                    child: Image.network(
+                      'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey[300],
+                          child: const Icon(
+                            Icons.store,
+                            color: Colors.grey,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
 
@@ -177,19 +178,25 @@ class _UnionAppBarState extends State<UnionAppBar> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.search, size: 22),
+                      icon: Icon(Icons.search, size: isDesktop ? 22 : 20),
                       color: Colors.grey[700],
                       onPressed: () => _showSearchDialog(context),
                       tooltip: 'Search',
+                      padding: EdgeInsets.all(isDesktop ? 8 : 4),
+                      constraints: const BoxConstraints(),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.person_outline, size: 22),
+                      icon:
+                          Icon(Icons.person_outline, size: isDesktop ? 22 : 20),
                       color: Colors.grey[700],
                       onPressed: () => _navigateTo(context, '/auth'),
                       tooltip: 'Account',
+                      padding: EdgeInsets.all(isDesktop ? 8 : 4),
+                      constraints: const BoxConstraints(),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.shopping_bag_outlined, size: 22),
+                      icon: Icon(Icons.shopping_bag_outlined,
+                          size: isDesktop ? 22 : 20),
                       color: Colors.grey[700],
                       onPressed: () {
                         // TODO: Navigate to cart
@@ -201,13 +208,17 @@ class _UnionAppBarState extends State<UnionAppBar> {
                         );
                       },
                       tooltip: 'Cart',
+                      padding: EdgeInsets.all(isDesktop ? 8 : 4),
+                      constraints: const BoxConstraints(),
                     ),
                     if (!isDesktop)
                       IconButton(
-                        icon: const Icon(Icons.menu, size: 22),
+                        icon: const Icon(Icons.menu, size: 20),
                         color: Colors.grey[700],
                         onPressed: () => _showMobileMenu(context),
                         tooltip: 'Menu',
+                        padding: const EdgeInsets.all(4),
+                        constraints: const BoxConstraints(),
                       ),
                   ],
                 ),
