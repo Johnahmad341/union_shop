@@ -5,7 +5,8 @@ import 'package:union_shop/src/widgets/product_card.dart';
 
 void main() {
   group('ProductCard Widget', () {
-    testWidgets('ProductCard displays product title', (WidgetTester tester) async {
+    testWidgets('ProductCard displays product title',
+        (WidgetTester tester) async {
       // Arrange
       const product = Product(
         title: 'Test Hoodie',
@@ -94,8 +95,8 @@ void main() {
           ),
           routes: {
             '/product': (context) => const Scaffold(
-              body: Center(child: Text('Product Page')),
-            ),
+                  body: Center(child: Text('Product Page')),
+                ),
           },
         ),
       );
@@ -215,7 +216,8 @@ void main() {
       );
 
       // Assert
-      expect(find.text('This is a very long product title that should truncate'),
+      expect(
+          find.text('This is a very long product title that should truncate'),
           findsOneWidget);
     });
   });
