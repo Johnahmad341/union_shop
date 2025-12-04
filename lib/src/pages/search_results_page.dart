@@ -13,32 +13,36 @@ class SearchResultsPage extends StatefulWidget {
 }
 
 class _SearchResultsPageState extends State<SearchResultsPage> {
-  late List<Product> searchResults;
-  late String searchQuery;
   String _sortBy = 'Featured';
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Get search query from route arguments
-    searchQuery = ModalRoute.of(context)?.settings.arguments as String? ?? '';
-    // Perform search
-    searchResults = SearchService.searchProducts(searchQuery);
-  }
 
   void _applySorting(String sortOption) {
     setState(() {
       _sortBy = sortOption;
-      if (sortOption == 'Price: Low to High') {
-        searchResults = SearchService.sortByPriceAsc(searchResults);
-      } else if (sortOption == 'Price: High to Low') {
-        searchResults = SearchService.sortByPriceDesc(searchResults);
-      }
     });
+  }
+
+  double _parsePrice(String price) {
+    final cleaned = price.replaceAll(RegExp(r'[^0-9.]'), '');
+    return double.tryParse(cleaned) ?? 0.0;
   }
 
   @override
   Widget build(BuildContext context) {
+    final String searchQuery =
+        ModalRoute.of(context)!.settings.arguments as String;
+
+    // Get search results
+    List<Product> searchResults = SearchService.searchProducts(searchQuery);
+
+    // Apply sorting
+    if (_sortBy == 'Price: Low to High') {
+      searchResults
+          .sort((a, b) => _parsePrice(a.price).compareTo(_parsePrice(b.price)));
+    } else if (_sortBy == 'Price: High to Low') {
+      searchResults
+          .sort((a, b) => _parsePrice(b.price).compareTo(_parsePrice(a.price)));
+    }
+
     final screenWidth = MediaQuery.of(context).size.width;
 
     // Calculate number of columns based on screen width
