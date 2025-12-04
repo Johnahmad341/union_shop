@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:union_shop/src/models/product_model.dart';
+import 'package:union_shop/src/services/cart_service.dart';
 import 'package:union_shop/src/widgets/app_bar.dart';
 import 'package:union_shop/src/widgets/footer.dart';
 
@@ -13,6 +15,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   String? _selectedSize;
   String? _selectedColour;
+  int _quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +135,29 @@ class _ProductPageState extends State<ProductPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Button does not need to do anything yet
+                        // Add item to cart
+                        context.read<CartService>().addToCart(
+                              product,
+                              quantity: _quantity,
+                              selectedSize: _selectedSize,
+                              selectedColour: _selectedColour,
+                            );
+
+                        // Show success message
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Added $_quantity ${_quantity > 1 ? 'items' : 'item'} to cart',
+                            ),
+                            duration: const Duration(seconds: 2),
+                            backgroundColor: const Color(0xFF4d2963),
+                          ),
+                        );
+
+                        // Reset quantity
+                        setState(() {
+                          _quantity = 1;
+                        });
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF4d2963),
@@ -211,12 +236,22 @@ class _ProductPageState extends State<ProductPage> {
         const Spacer(),
         IconButton(
           icon: const Icon(Icons.remove),
-          onPressed: () {},
+          onPressed: _quantity > 1
+              ? () {
+                  setState(() {
+                    _quantity--;
+                  });
+                }
+              : null,
         ),
-        const Text('1', style: TextStyle(fontSize: 18)),
+        Text('$_quantity', style: const TextStyle(fontSize: 18)),
         IconButton(
           icon: const Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              _quantity++;
+            });
+          },
         ),
       ],
     );
