@@ -14,8 +14,13 @@ class CartItem {
   });
 
   /// Calculate the total price for this item (product price × quantity)
+  /// Uses sale price if product is on sale
   double getTotalPrice() {
-    final priceString = product.price.replaceAll('£', '').replaceAll(',', '');
+    // Use sale price if available, otherwise use regular price
+    final priceToUse = (product.isOnSale && product.salePrice != null)
+        ? product.salePrice!
+        : product.price;
+    final priceString = priceToUse.replaceAll('£', '').replaceAll(',', '');
     final price = double.tryParse(priceString) ?? 0.0;
     return price * quantity;
   }

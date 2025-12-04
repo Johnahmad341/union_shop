@@ -303,14 +303,38 @@ class CartPage extends StatelessWidget {
                     ),
                   ),
                 const SizedBox(height: 8),
-                Text(
-                  item.product.price,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF4d2963),
+                // Price display with sale logic
+                if (item.product.isOnSale && item.product.salePrice != null)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.product.price,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      Text(
+                        item.product.salePrice!,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Text(
+                    item.product.price,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF4d2963),
+                    ),
                   ),
-                ),
               ],
             ),
           ),
