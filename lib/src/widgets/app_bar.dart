@@ -23,20 +23,49 @@ class _UnionAppBarState extends State<UnionAppBar> {
   }
 
   void _showSearchDialog(BuildContext context) {
+    final TextEditingController searchController = TextEditingController();
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Search'),
-        content: const TextField(
-          decoration: InputDecoration(
-            hintText: 'Search for products...',
+        title: const Text('Search Products'),
+        content: TextField(
+          controller: searchController,
+          autofocus: true,
+          decoration: const InputDecoration(
+            hintText: 'Search by product name or category...',
             prefixIcon: Icon(Icons.search),
+            border: OutlineInputBorder(),
           ),
+          onSubmitted: (query) {
+            if (query.isNotEmpty) {
+              Navigator.pop(context);
+              Navigator.pushNamed(
+                context,
+                '/search',
+                arguments: query,
+              );
+            }
+          },
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              final query = searchController.text.trim();
+              if (query.isNotEmpty) {
+                Navigator.pop(context);
+                Navigator.pushNamed(
+                  context,
+                  '/search',
+                  arguments: query,
+                );
+              }
+            },
+            child: const Text('Search'),
           ),
         ],
       ),
