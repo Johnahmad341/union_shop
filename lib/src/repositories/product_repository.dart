@@ -187,13 +187,17 @@ class ProductRepository {
         price: '£8.00',
         imageUrl: 'assets/images/essentials/uop_tote_bag.jpg',
         description: 'A handy tote bag for carrying your books and essentials.',
-        category: 'Essentials'),
+        category: 'Essentials',
+        isOnSale: true,
+        salePrice: '£5.99'),
     Product(
         title: 'UoP Notebook',
         price: '£6.00',
         imageUrl: 'assets/images/essentials/uop_notebook.jpg',
         description: 'A5 notebook with the University crest.',
-        category: 'Essentials'),
+        category: 'Essentials',
+        isOnSale: true,
+        salePrice: '£3.99'),
     Product(
         title: 'UoP Mug',
         price: '£7.99',
@@ -217,7 +221,9 @@ class ProductRepository {
         imageUrl: 'assets/images/graduation/class_of_2024_hoodie.jpg',
         description:
             'Commemorate your graduation with this special edition hoodie.',
-        category: 'Graduation'),
+        category: 'Graduation',
+        isOnSale: true,
+        salePrice: '£29.99'),
     Product(
         title: 'Certificate Frame',
         price: '£25.00',
@@ -247,6 +253,11 @@ class ProductRepository {
   // Method to get all products.
   static List<Product> getAllProducts() {
     return _allProducts;
+  }
+
+  // Method to get all products that are on sale.
+  static List<Product> getSaleProducts() {
+    return _allProducts.where((product) => product.isOnSale).toList();
   }
 
   // Method to get a specified number of random products for the home page.
