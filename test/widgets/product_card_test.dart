@@ -17,7 +17,7 @@ void main() {
 
       // Act
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ProductCard(product: product),
           ),
@@ -40,7 +40,7 @@ void main() {
 
       // Act
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ProductCard(product: product),
           ),
@@ -65,7 +65,7 @@ void main() {
 
       // Act
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ProductCard(product: product),
           ),
@@ -90,7 +90,7 @@ void main() {
       // Act
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
+          home: const Scaffold(
             body: ProductCard(product: product),
           ),
           routes: {
@@ -122,7 +122,7 @@ void main() {
 
       // Act
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ProductCard(product: product),
           ),
@@ -152,7 +152,7 @@ void main() {
 
       // Act
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ProductCard(product: product),
           ),
@@ -181,7 +181,7 @@ void main() {
 
       // Act
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ProductCard(product: product),
           ),
@@ -204,7 +204,7 @@ void main() {
 
       // Act
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: SizedBox(
               width: 150,
