@@ -47,8 +47,7 @@ class SearchService {
     double maxPrice,
   ) {
     return products.where((product) {
-      final priceString =
-          product.price.replaceAll('£', '').replaceAll(',', '');
+      final priceString = product.price.replaceAll('£', '').replaceAll(',', '');
       final price = double.tryParse(priceString) ?? 0.0;
       return price >= minPrice && price <= maxPrice;
     }).toList();
