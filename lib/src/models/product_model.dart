@@ -9,6 +9,10 @@ class Product {
   final List<String> availableSizes; // e.g. ['S', 'M', 'L']
   final List<String> availableColours; // e.g. ['Red', 'Blue']
 
+  // Sale attributes
+  final bool isOnSale;
+  final String? salePrice; // The discounted price (e.g., '£24.99')
+
   const Product({
     required this.title,
     required this.price,
@@ -17,5 +21,7 @@ class Product {
     this.category = 'Uncategorized',
     this.availableSizes = const [],
     this.availableColours = const [],
+    this.isOnSale = false,
+    this.salePrice,
   });
 }
