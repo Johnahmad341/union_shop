@@ -211,15 +211,7 @@ class _UnionAppBarState extends State<UnionAppBar> {
                       icon: Icon(Icons.shopping_bag_outlined,
                           size: isDesktop ? 22 : 20),
                       color: Colors.grey[700],
-                      onPressed: () {
-                        // TODO: Navigate to cart
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Cart feature coming soon!'),
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
-                      },
+                      onPressed: () => _navigateTo(context, '/cart'),
                       tooltip: 'Cart',
                       padding: EdgeInsets.all(isDesktop ? 8 : 4),
                       constraints: const BoxConstraints(),
