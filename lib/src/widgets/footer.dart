@@ -85,7 +85,9 @@ class UnionFooter extends StatelessWidget {
           _buildFooterLink(context, 'About Us', () {
             Navigator.pushNamed(context, '/about');
           }),
-          _buildFooterLink(context, 'Contact Us', () {}),
+          _buildFooterLink(context, 'Contact Us', () {
+            Navigator.pushNamed(context, '/contact');
+          }),
           _buildFooterLink(context, 'FAQs', () {}),
         ],
       ),
