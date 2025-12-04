@@ -122,8 +122,7 @@ class HomeScreen extends StatelessWidget {
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount:
                             MediaQuery.of(context).size.width > 600 ? 4 : 2,
                         crossAxisSpacing: 24,
@@ -192,10 +191,34 @@ class ProductCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  product.price,
-                  style: const TextStyle(fontSize: 13, color: Colors.grey),
-                ),
+                // Price display with sale logic
+                if (product.isOnSale && product.salePrice != null)
+                  Row(
+                    children: [
+                      Text(
+                        product.price,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        product.salePrice!,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Text(
+                    product.price,
+                    style: const TextStyle(fontSize: 13, color: Colors.grey),
+                  ),
               ],
             ),
           ),
