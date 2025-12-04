@@ -11,6 +11,19 @@ class AllProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Product> products = ProductRepository.getAllProducts();
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Calculate number of columns based on screen width
+    int crossAxisCount;
+    if (screenWidth < 600) {
+      crossAxisCount = 2; // Mobile
+    } else if (screenWidth < 900) {
+      crossAxisCount = 3; // Tablet
+    } else if (screenWidth < 1200) {
+      crossAxisCount = 4; // Small desktop
+    } else {
+      crossAxisCount = 5; // Large desktop
+    }
 
     return Scaffold(
       appBar: const UnionAppBar(),
@@ -28,8 +41,8 @@ class AllProductsPage extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.all(16.0),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
                 childAspectRatio: 0.75,
