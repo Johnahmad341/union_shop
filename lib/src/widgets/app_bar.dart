@@ -152,18 +152,31 @@ class _UnionAppBarState extends State<UnionAppBar> {
                 // Logo
                 GestureDetector(
                   onTap: () => _navigateToHome(context),
-                  child: SizedBox(
-                    height: isDesktop ? 40 : 32,
-                    width: isDesktop ? 40 : 32,
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxHeight: isDesktop ? 200 : 168,
+                      maxWidth: isDesktop ? 200 : 168,
+                    ),
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                       fit: BoxFit.contain,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
                           color: Colors.grey[300],
-                          child: const Icon(
+                          child: Icon(
                             Icons.store,
                             color: Colors.grey,
+                            size: isDesktop ? 120 : 96,
+                          ),
+                        );
+                      },
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return SizedBox(
+                          width: isDesktop ? 200 : 168,
+                          height: isDesktop ? 200 : 168,
+                          child: const Center(
+                            child: CircularProgressIndicator(strokeWidth: 2),
                           ),
                         );
                       },
