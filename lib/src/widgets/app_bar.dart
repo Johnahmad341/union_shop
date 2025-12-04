@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class UnionAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -9,6 +11,20 @@ class UnionAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
+  }
+
+  String randomHeaderText() {
+    List<String> headers = [
+      "Top quality clothing",
+      "Become a true student",
+      "Embrace being an Alumni of UoP",
+      "Show your UoP pride",
+      "The only place for UoP merch",
+      "Support your Students' Union"
+    ];
+
+    Random random = Random();
+    return headers[random.nextInt(headers.length)];
   }
 
   @override
@@ -23,10 +39,10 @@ class UnionAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 8),
             color: const Color(0xFF4d2963),
-            child: const Text(
-              'PLACEHOLDER HEADER TEXT',
+            child: Text(
+              randomHeaderText(),
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
           // Main header
